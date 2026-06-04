@@ -1,0 +1,54 @@
+<!--
+  Example recap FRAGMENT for ratm-recite -Wrap mode.
+  This is a body fragment only (no <html>/<head>). recite.ps1 -Wrap drops it into shell.html.
+  Demo content: a recap of the ratmac skill set (dogfooding — recitation is the skill's own job).
+
+  Try it:
+    pwsh -File ../scripts/recite.ps1 -Html example-content.html -Wrap -Title "ratmac skill set"
+-->
+<p>The <strong>ratmac</strong> skill set is 11 composable skills that automate the
+<em>scheduler</em> data model (proj / slice / task triplet). The scheduler defines the
+<strong>shape</strong>; ratmac is the <strong>automation</strong> that maintains it.</p>
+
+<h2>The 11 skills</h2>
+
+<h3>Stateless / no-write</h3>
+<table>
+  <thead><tr><th>skill</th><th>role</th></tr></thead>
+  <tbody>
+    <tr><td><code>ratmac-init</code></td><td>Loads invariants R1&ndash;R18 + the output-contract template. Pulled in first by every other skill.</td></tr>
+    <tr><td><code>ratmac-route</code></td><td>Session boot. Reads active proj state, lists slice + tasks, classifies a suggested next-action mode.</td></tr>
+    <tr><td><code>ratmac-lint</code></td><td>Read-only checker: schema + invariants + dangling links. <code>--strict</code> adds spec-vs-disk audit.</td></tr>
+  </tbody>
+</table>
+
+<h3>Write skills</h3>
+<table>
+  <thead><tr><th>skill</th><th>role</th><th>regen?</th></tr></thead>
+  <tbody>
+    <tr><td><code>ratmac-kickoff</code></td><td>Scaffold a tier (proj/slice/task) + parent state/log rows.</td><td>no (run lint yourself)</td></tr>
+    <tr><td><code>ratmac-checkpoint</code></td><td>Work-pause snapshot: bump state, append log, add to <code>## affects</code>.</td><td>no</td></tr>
+    <tr><td><code>ratmac-mutate</code></td><td>In-place plan/approach/ticket revision.</td><td>no</td></tr>
+    <tr><td><code>ratmac-scope</code></td><td>sole/dual scope expand/contract + scope-history.</td><td>yes</td></tr>
+    <tr><td><code>ratmac-close</code></td><td>Task done/abandoned, freeze affects, mv to archive.</td><td>yes (regen only)</td></tr>
+    <tr><td><code>ratmac-transit</code></td><td>Slice/proj transition: summary, status, mv to archive.</td><td>yes + lint</td></tr>
+  </tbody>
+</table>
+
+<h3>Generated + orchestrator</h3>
+<table>
+  <thead><tr><th>skill</th><th>role</th></tr></thead>
+  <tbody>
+    <tr><td><code>ratmac-regen</code></td><td>Rebuild GENERATED-only content (residuals, fenced rollups). Byte-idempotent &rarr; drift detector.</td></tr>
+    <tr><td><code>ratmac-auto</code></td><td>Orchestrator. State machine + closed-loop; delegates to the others; stops on ambiguity.</td></tr>
+  </tbody>
+</table>
+
+<h2>Orchestration (ratmac-auto)</h2>
+<pre><code>INIT &rarr; CLASSIFY &rarr; EVIDENCE &rarr; ROUTE &rarr; EXECUTE &rarr; VERIFY &rarr; REPORT
+                              |                                  |
+                              +--&gt; STOP (HUMAN_DECISION_REQUIRED|BLOCKED)--+</code></pre>
+
+<blockquote>Closed-loop: every routed branch ends in <code>completed-in-scope</code>,
+<code>blocked</code>, <code>human-decision-required</code>, or <code>handoff-emitted</code>.
+On any ambiguity, STOP and report &mdash; never guess the route.</blockquote>

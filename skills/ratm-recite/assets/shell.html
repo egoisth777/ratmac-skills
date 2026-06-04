@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  ratm-recite shell. Styling chrome for fragment authoring (-Wrap mode).
+  recite.ps1 / recite.sh fill two markers (each appears exactly once below):
+  the TITLE token in head/header, and the CONTENT slot in main.
+  No JS, no buttons: alignment happens in chat (design RR1/RR2).
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>__TITLE__</title>
+  <style>
+    :root {
+      --fg: #1c1c1e;
+      --muted: #6b6b70;
+      --bg: #ffffff;
+      --panel: #f6f6f7;
+      --border: #e2e2e6;
+      --accent: #2f6fed;
+      --code-bg: #f0f1f3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #e6e6ea;
+        --muted: #9a9aa2;
+        --bg: #161617;
+        --panel: #1f1f21;
+        --border: #2c2c30;
+        --accent: #6ea0ff;
+        --code-bg: #232327;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+    header.recite-head {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+    header.recite-head h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    header.recite-head .sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.35rem;
+    }
+    h1, h2, h3, h4 { line-height: 1.25; letter-spacing: -0.01em; }
+    h2 { font-size: 1.25rem; margin-top: 2.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+    h3 { font-size: 1.05rem; margin-top: 1.5rem; }
+    p { margin: 0.75rem 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { padding-left: 1.4rem; }
+    li { margin: 0.3rem 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.12em 0.38em;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      overflow-x: auto;
+    }
+    pre code { background: none; padding: 0; font-size: 0.85rem; line-height: 1.5; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1.1rem 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--panel); font-weight: 600; }
+    tr:nth-child(even) td { background: color-mix(in srgb, var(--panel) 45%, transparent); }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.4rem 1rem;
+      border-left: 3px solid var(--accent);
+      color: var(--muted);
+      background: var(--panel);
+      border-radius: 0 6px 6px 0;
+    }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    footer.recite-foot {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="recite-head">
+      <h1>__TITLE__</h1>
+      <div class="sub">Recitation for review — align in chat (say "aligned", or tell me what to change).</div>
+    </header>
+    <main>
+      <!-- CONTENT_SLOT -->
+    </main>
+  </div>
+  <footer class="recite-foot">
+    ratm-recite — presentation surface. This page is read-only; nothing here signals back. Close the tab when done.
+  </footer>
+</body>
+</html>
