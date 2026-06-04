@@ -1,0 +1,10 @@
+# Lock line endings to LF on every checkout (overrides core.autocrlf).
+# The ratmac/arca engines write LF via Set-RatmacFileLines for cross-engine byte
+# parity (R4/R10); a CRLF checkout would break that and the live symlinked skills.
+* text=auto eol=lf
+
+# Templates and shell/posh scripts are LF, always.
+*.tpl text eol=lf
+*.sh  text eol=lf
+*.ps1 text eol=lf
+*.md  text eol=lf
