@@ -17,6 +17,12 @@ the family that owns, enforces, and self-heals the scheduler invariants.
 The family has 11 skills. Load `ratmac-init` first; orient with `ratmac-route`; let
 `ratmac-auto` drive the loop when you do not want to pick the write-skill by hand.
 
+Delta (2026-07-03): a 12th skill, `ratmac-ratio`, is in DESIGN under the scheduler
+issue tier (`issue/i-ratmac-ratio/`, tracked by `state.toml`). The R-invariants below —
+including R3 ("11 skills, frozen set") — re-lock at ratio publish. Gen-2 skill names its
+contract references (`ratmac-creavit`, `ratmac-ianitor`, `ratmac-automata`, …) are
+pdrft-brain-v3 pending and not part of the committed family.
+
 | skill | role | writes? |
 |---|---|---|
 | `ratmac-init` | Stateless loader — prints the locked R1-R18 invariants + the uniform output contract. Composed-on by every other ratmac skill. | no (pure reference) |
